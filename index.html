@@ -1,40 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Emma Buie</title>
 
   <style>
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      background-color: #f6f1ff;
+      background: #f6f1ff;
+    }
+
+    /* A full-screen “frame” */
+    .frame {
+      width: 100%;
+      height: 100vh;              /* exactly one screen tall */
+      background: #f6f1ff;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
     }
 
-    .container {
+    /* The image will NOT be cropped */
+    .hero {
       width: 100%;
-      max-width: 420px;
-      background: white;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-    }
-
-    .container img {
-      width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: contain;         /* shows the whole image */
+      object-position: top center; /* starts at the top (first images visible) */
       display: block;
+      background: white;           /* clean border area if needed */
+    }
+
+    /* Optional: on desktop keep it a bit nicer */
+    @media (min-width: 768px) {
+      .frame {
+        padding: 24px;
+      }
+      .hero {
+        max-width: 430px;
+        border-radius: 24px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <img src="art.png" alt="Emma Buie artwork">
+  <div class="frame">
+    <img src="art.png" alt="Emma Buie design" class="hero" />
   </div>
 </body>
 </html>
+
