@@ -9,7 +9,7 @@ html, body {
 body {
   background: #000;
   color: #fff;
-  overflow: hidden; /* prevents whole-site scrolling */
+  overflow: hidden; /* prevents the whole site from scrolling */
 }
 
 /* ---------- TOP BAR ---------- */
@@ -31,13 +31,6 @@ body {
   display: flex;
   align-items: center;
   gap: 18px;
-}
-
-/* keeps HOME left of MENU on same line */
-.right-actions {
-  display: flex;
-  align-items: center;
-  gap: 28px;
 }
 
 .icon-btn {
@@ -64,6 +57,25 @@ body {
   font-size: 20px;
 }
 
+/* RIGHT SIDE: HOME + MENU in one row */
+.right-actions{
+  display: flex;
+  align-items: center;
+  gap: 34px; /* spacing between HOME and MENU */
+}
+
+/* HOME button styled to match MENU */
+.home-btn {
+  border: none;
+  background: none;
+  color: #000;
+  font-family: inherit;
+  cursor: pointer;
+  letter-spacing: .35em;
+  font-size: 22px;
+  padding: 0;
+}
+
 .menu-btn {
   border: none;
   background: none;
@@ -82,9 +94,6 @@ body {
   font-size: 28px;
   line-height: 1;
 }
-
-/* HOME uses the same style as MENU via class="menu-btn home-btn" */
-.home-btn {}
 
 /* ---------- DROPDOWN ---------- */
 .dropdown {
@@ -119,7 +128,7 @@ body {
 
 .nav-link:hover { opacity: .7; }
 
-/* ---------- PAGES ---------- */
+/* ---------- PAGES container ---------- */
 .pages {
   position: fixed;
   top: 90px;
@@ -136,7 +145,6 @@ body {
 
 .page.is-active { display: block; }
 
-/* Only some pages scroll */
 .page-scroll {
   overflow-y: auto;
   overflow-x: hidden;
@@ -149,18 +157,6 @@ body {
   width: 100%;
   height: 100%;
   position: relative;
-}
-
-/* ✅ makes <picture> behave like the old <img> (same crop/placement) */
-.hero picture {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.hero picture img {
-  display: block;
-  width: 100%;
-  height: 100%;
 }
 
 .hero-img {
@@ -316,17 +312,18 @@ body.loaded .hero-img { filter: blur(0); }
 .radio input { transform: translateY(1px); }
 
 .submit-btn {
-  margin-top: 34px;
-  background: transparent;
+  margin-top: 28px;
+  padding: 14px 26px;
   border: 2px solid rgba(255,255,255,.75);
+  background: transparent;
   color: #fff;
   font-family: inherit;
-  font-size: 22px;
-  letter-spacing: .35em;
-  padding: 14px 34px;
+  font-size: 20px;
+  letter-spacing: .08em;
   cursor: pointer;
 }
-.submit-btn:hover { opacity: .8; }
+
+.submit-btn:hover { opacity: .85; }
 
 .contact-spacer { height: 40px; }
 
@@ -337,5 +334,5 @@ body.loaded .hero-img { filter: blur(0); }
   .about-layout { grid-template-columns: 1fr; }
   .about-image { height: 60vh; }
   .hero-name { padding: 0 28px; }
-  .right-actions { gap: 18px; }
+  .right-actions { gap: 22px; }
 }
