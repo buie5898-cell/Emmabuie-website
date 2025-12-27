@@ -9,10 +9,10 @@ html, body {
 body {
   background: #000;
   color: #fff;
-  overflow: hidden; /* prevents whole-site scrolling */
+  overflow: hidden; /* IMPORTANT: prevents site from scrolling like you wanted */
 }
 
-/* ---------- TOP BAR ---------- */
+/* ---------- TOP BAR (matches screenshot) ---------- */
 .topbar {
   position: fixed;
   top: 0;
@@ -33,7 +33,7 @@ body {
   gap: 18px;
 }
 
-/* ✅ tiny addition so HOME is left of MENU */
+/* ✅ ONLY ADDITION: keeps HOME and MENU on the same line */
 .right-actions {
   display: flex;
   align-items: center;
@@ -64,21 +64,6 @@ body {
   font-size: 20px;
 }
 
-/* ✅ HOME button matches MENU */
-.home-btn {
-  border: none;
-  background: none;
-  color: #000;
-  font-family: inherit;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  letter-spacing: .35em;
-  font-size: 22px;
-  padding: 0;
-}
-.home-btn:hover { opacity: .7; }
-
 .menu-btn {
   border: none;
   background: none;
@@ -90,6 +75,7 @@ body {
   cursor: pointer;
   letter-spacing: .35em;
   font-size: 22px;
+  padding: 0;
 }
 
 .menu-icon {
@@ -97,7 +83,12 @@ body {
   line-height: 1;
 }
 
-/* ---------- DROPDOWN ---------- */
+/* ✅ ONLY ADDITION: HOME uses the SAME style as MENU */
+.home-btn {
+  /* inherits menu-btn styling via class="menu-btn home-btn" */
+}
+
+/* ---------- DROPDOWN (smooth slide like your screenshot) ---------- */
 .dropdown {
   position: fixed;
   top: 90px;
@@ -130,7 +121,7 @@ body {
 
 .nav-link:hover { opacity: .7; }
 
-/* ---------- PAGES ---------- */
+/* ---------- PAGES container ---------- */
 .pages {
   position: fixed;
   top: 90px;
@@ -155,19 +146,11 @@ body {
   padding-bottom: 110px;
 }
 
-/* ---------- HOME ---------- */
+/* ---------- HOME (hero like rough draft) ---------- */
 .hero {
   width: 100%;
   height: 100%;
   position: relative;
-}
-
-/* IMPORTANT: make picture behave like your img */
-.hero picture,
-.hero picture img {
-  width: 100%;
-  height: 100%;
-  display: block;
 }
 
 .hero-img {
@@ -194,7 +177,7 @@ body.loaded .hero-img { filter: blur(0); }
   color: rgba(255,255,255,.55);
 }
 
-/* ---------- ABOUT ---------- */
+/* ---------- ABOUT (text + image like rough draft) ---------- */
 .about-layout {
   width: 100%;
   min-height: calc(100vh - 90px);
@@ -204,7 +187,7 @@ body.loaded .hero-img { filter: blur(0); }
 }
 
 .about-text {
-  background: #000;
+  background: #000; /* black behind text */
   padding: 56px 54px;
 }
 
@@ -236,7 +219,7 @@ body.loaded .hero-img { filter: blur(0); }
   display: block;
 }
 
-/* ---------- SERVICES ---------- */
+/* ---------- SERVICES (scroll allowed) ---------- */
 .services {
   padding: 56px 54px 90px;
 }
@@ -278,7 +261,7 @@ body.loaded .hero-img { filter: blur(0); }
   opacity: .95;
 }
 
-/* ---------- GET STARTED ---------- */
+/* ---------- GET STARTED (won’t cut off) ---------- */
 .contact {
   padding: 56px 54px 90px;
   max-width: 980px;
@@ -322,21 +305,22 @@ body.loaded .hero-img { filter: blur(0); }
 
 .radio input { transform: translateY(1px); }
 
-.contact-spacer { height: 40px; }
-
-/* ✅ Submit button */
+/* ✅ ONLY ADDITION: submit button underneath the info */
 .submit-btn {
-  margin-top: 40px;
+  margin-top: 34px;
   background: transparent;
-  border: 2px solid rgba(255,255,255,.85);
+  border: 2px solid rgba(255,255,255,.75);
   color: #fff;
   font-family: inherit;
   font-size: 22px;
-  letter-spacing: .25em;
-  padding: 14px 38px;
+  letter-spacing: .35em;
+  padding: 14px 34px;
   cursor: pointer;
 }
-.submit-btn:hover { opacity: .85; }
+
+.submit-btn:hover { opacity: .8; }
+
+.contact-spacer { height: 40px; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 980px) {
