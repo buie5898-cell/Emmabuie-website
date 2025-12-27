@@ -52,4 +52,14 @@ header a {
   font-size: 64px;
   font-weight: 300;
 }
+/* HOME BUTTON (beside menu) */
+.home-btn{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  margin-right: 16px;
+}
 
