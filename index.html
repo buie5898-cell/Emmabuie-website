@@ -13,50 +13,38 @@
 </head>
 
 <body>
-  <!-- TOP BAR (always visible) -->
+  <!-- TOP BAR -->
   <header class="topbar">
     <div class="left-actions">
-      <a class="icon-btn" href="https://instagram.com/emmabuie" target="_blank" rel="noopener">
-        <!-- simple black IG icon -->
-        <svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm10.25 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Z"/>
+      <a class="icon-btn" href="https://instagram.com/emmabuie" target="_blank">
+        <svg class="ig-icon" viewBox="0 0 24 24">
+          <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Z"/>
         </svg>
       </a>
-
       <a class="mail-link" href="mailto:emmaruthbuie@yahoo.com">MAIL</a>
     </div>
 
-    <!-- RIGHT SIDE: HOME (left) + MENU (right) -->
     <div class="right-actions">
-      <button class="home-btn" id="homeBtn" type="button">HOME</button>
-
-      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="dropdown">
-        <span class="menu-text">MENU</span>
+      <button class="menu-btn home-btn" onclick="goTo('home')">HOME</button>
+      <button class="menu-btn" id="menuBtn">
+        <span>MENU</span>
         <span class="menu-icon">≡</span>
       </button>
     </div>
   </header>
 
-  <!-- DROPDOWN (slides down like your screenshot) -->
-  <nav class="dropdown" id="dropdown" aria-hidden="true">
-    <div class="dropdown-nav">
-      <button class="nav-link" data-page="about" type="button">About</button>
-      <button class="nav-link" data-page="services" type="button">Services &amp; Pricing</button>
-      <button class="nav-link" data-page="contact" type="button">Get Started</button>
-    </div>
+  <!-- DROPDOWN -->
+  <nav class="dropdown" id="dropdown">
+    <button class="nav-link" onclick="goTo('about')">About</button>
+    <button class="nav-link" onclick="goTo('services')">Services & Pricing</button>
+    <button class="nav-link" onclick="goTo('contact')">Get Started</button>
   </nav>
 
-  <!-- PAGES (home is locked, others can scroll) -->
   <main class="pages">
-    <!-- HOME (NO SCROLL) -->
-    <section class="page page-home is-active" id="home" aria-label="Home">
+    <!-- HOME -->
+    <section class="page is-active" id="home">
       <div class="hero">
-        <img
-          src="./assets/hero.png"
-          class="hero-img"
-          alt="Emma Buie"
-          onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/buie5898-cell/Emmabuie-website/main/assets/hero.png';"
-        />
+        <img src="./assets/hero.png" class="hero-img" alt="Emma Buie" />
         <div class="hero-name">
           <span>EMMA</span>
           <span>BUIE</span>
@@ -64,202 +52,118 @@
       </div>
     </section>
 
-    <!-- ABOUT (SCROLL OK) -->
-    <section class="page page-scroll" id="about" aria-label="About">
+    <!-- ABOUT -->
+    <section class="page page-scroll" id="about">
       <div class="about-layout">
         <div class="about-text">
           <h1>HI I’M EMMA</h1>
-
-          <p>
-            I’m a self-taught web designer specializing in simple, custom-built websites for creators and businesses
-            seeking a strong digital presence.
-          </p>
-
-          <p>
-            Every site I design is built from scratch, ensuring each project is intentional, scalable, and strategically
-            aligned with your brand.
-          </p>
-
-          <p>
-            My approach blends clean design, thoughtful structure, and long-term reliability. I offer flat-rate pricing
-            for clarity and affordability, along with low-cost annual maintenance to keep your website optimized and current.
-          </p>
-
-          <p class="about-pad"></p>
+          <p>I’m a self-taught web designer specializing in simple, custom-built websites for creators and businesses seeking a strong digital presence.</p>
+          <p>Every site I design is built from scratch, ensuring each project is intentional, scalable, and strategically aligned with your brand.</p>
+          <p>My approach blends clean design, thoughtful structure, and long-term reliability. I offer flat-rate pricing for clarity and affordability, along with low-cost annual maintenance to keep your website optimized and current.</p>
         </div>
-
         <div class="about-image">
-          <img src="./assets/rough2.png" alt="About photo" />
+          <img src="./assets/rough2.png" alt="">
         </div>
       </div>
-
-      <!-- second image underneath -->
       <div class="about-bottom">
-        <img src="./assets/rough1.png" alt="Second about photo" />
+        <img src="./assets/rough1.png" alt="">
       </div>
     </section>
 
-    <!-- SERVICES (SCROLL OK) -->
-    <section class="page page-scroll" id="services" aria-label="Services">
+    <!-- SERVICES -->
+    <section class="page page-scroll" id="services">
       <div class="services">
         <h2>MAIN SERVICES</h2>
 
         <div class="services-grid">
           <div class="service-card">
-            <h3>
-              CUSTOM WEBSITE DESIGN<br>
-              STARTING AT $400
-            </h3>
-            <p>
-              Simple, custom-built websites designed from scratch for creators and businesses seeking a strong digital presence.
-              Each project is tailored, scalable, and thoughtfully aligned with your brand.
-            </p>
-
+            <h3>CUSTOM WEBSITE DESIGN<br>STARTING AT $400</h3>
+            <p>Simple, custom-built websites designed from scratch for creators and businesses seeking a strong digital presence.</p>
             <div class="list">
-              <div>— Consultation &amp; project planning</div>
-              <div>— Custom design &amp; build</div>
-              <div>— Mobile + desktop optimization</div>
+              <div>— Consultation & planning</div>
+              <div>— Custom design & build</div>
+              <div>— Mobile + desktop</div>
               <div>— 1–5 pages</div>
               <div>— Launch support</div>
             </div>
           </div>
 
           <div class="service-card">
-            <h3>ANNUAL WEBSITE MAINTENANCE</h3>
+            <h3>ANNUAL MAINTENANCE</h3>
             <p class="muted">Starting at $50/year</p>
-            <p>
-              Ongoing support to keep your website updated, optimized, and performing seamlessly as your brand evolves.
-            </p>
-
             <div class="list">
-              <div>— Content &amp; image updates</div>
+              <div>— Updates</div>
               <div>— Performance checks</div>
-              <div>— Minor fixes &amp; adjustments</div>
+              <div>— Fixes</div>
             </div>
           </div>
 
           <div class="service-card">
-            <h3>ADDITIONAL SERVICES</h3>
-            <p>Additional Pages</p>
-            <p class="muted">$100 per page</p>
+            <h3>ADDITIONAL PAGES</h3>
+            <p>$100 per page</p>
           </div>
         </div>
 
         <p class="services-footer">
-          All projects are priced at a flat rate based on scope. No hourly billing. No hidden fees.
+          All projects are flat-rate. No hourly billing. No hidden fees.
         </p>
       </div>
     </section>
 
-    <!-- GET STARTED (SCROLL OK + won’t cut off) -->
-    <section class="page page-scroll" id="contact" aria-label="Get Started">
-      <div class="contact">
+    <!-- CONTACT -->
+    <section class="page page-scroll" id="contact">
+      <form
+        class="contact"
+        action="https://formspree.io/f/mqekqggd"
+        method="POST"
+      >
         <h2>Get Started</h2>
 
         <label class="field">
-          <span>First &amp; Last Name</span>
-          <input type="text" />
+          <span>Name</span>
+          <input type="text" name="name" required>
         </label>
 
         <label class="field">
           <span>Email</span>
-          <input type="email" />
+          <input type="email" name="email" required>
         </label>
 
         <label class="field">
           <span>Phone</span>
-          <input type="tel" />
+          <input type="tel" name="phone">
         </label>
 
         <label class="field">
           <span>Type of website</span>
-          <input type="text" />
+          <input type="text" name="website_type">
         </label>
 
         <div class="radio">
-          <span>Do you want yearly maintenance</span>
-          <label><input type="radio" name="maintenance" /> YES</label>
-          <label><input type="radio" name="maintenance" /> NO</label>
+          <span>Yearly maintenance?</span>
+          <label><input type="radio" name="maintenance" value="Yes"> YES</label>
+          <label><input type="radio" name="maintenance" value="No"> NO</label>
         </div>
 
-        <!-- SUBMIT BUTTON (added under the info) -->
-        <button class="submit-btn" id="submitBtn" type="button">Submit</button>
-
-        <div class="contact-spacer"></div>
-      </div>
+        <button type="submit" class="submit-btn">SUBMIT</button>
+      </form>
     </section>
   </main>
 
   <script>
     const menuBtn = document.getElementById("menuBtn");
     const dropdown = document.getElementById("dropdown");
-    const pages = document.querySelectorAll(".page");
-    const links = document.querySelectorAll(".nav-link");
-    const homeBtn = document.getElementById("homeBtn");
-    const submitBtn = document.getElementById("submitBtn");
 
-    function openMenu() {
-      dropdown.classList.add("open");
-      menuBtn.setAttribute("aria-expanded", "true");
-      dropdown.setAttribute("aria-hidden", "false");
-    }
+    menuBtn.onclick = () => dropdown.classList.toggle("open");
 
-    function closeMenu() {
+    function goTo(id) {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("is-active"));
+      document.getElementById(id).classList.add("is-active");
       dropdown.classList.remove("open");
-      menuBtn.setAttribute("aria-expanded", "false");
-      dropdown.setAttribute("aria-hidden", "true");
     }
 
-    function toggleMenu() {
-      dropdown.classList.contains("open") ? closeMenu() : openMenu();
-    }
-
-    function goTo(pageId) {
-      pages.forEach(p => p.classList.remove("is-active"));
-      const next = document.getElementById(pageId);
-      if (next) next.classList.add("is-active");
-      closeMenu();
-
-      // if scrolling pages, start at top
-      if (next && next.classList.contains("page-scroll")) next.scrollTop = 0;
-    }
-
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      toggleMenu();
-    });
-
-    links.forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        goTo(btn.dataset.page);
-      });
-    });
-
-    // HOME button
-    homeBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      goTo("home");
-    });
-
-    // Submit (basic placeholder)
-    submitBtn.addEventListener("click", () => {
-      alert("Submitted! (This is a placeholder — we can connect it to email or a form later.)");
-    });
-
-    // close if you click outside dropdown
-    document.addEventListener("click", () => closeMenu());
-
-    // don’t close if clicking inside dropdown
-    dropdown.addEventListener("click", (e) => e.stopPropagation());
-
-    // Esc closes menu
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMenu();
-    });
-
-    // smooth blur->clear animation on home image
-    window.addEventListener("load", () => document.body.classList.add("loaded"));
+    window.onload = () => document.body.classList.add("loaded");
   </script>
 </body>
 </html>
+ 
