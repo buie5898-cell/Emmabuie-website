@@ -9,10 +9,10 @@ html, body {
 body {
   background: #000;
   color: #fff;
-  overflow: hidden; /* prevents the whole site from scrolling */
+  overflow: hidden; /* IMPORTANT: prevents site from scrolling like you wanted */
 }
 
-/* ---------- TOP BAR ---------- */
+/* ---------- TOP BAR (matches screenshot) ---------- */
 .topbar {
   position: fixed;
   top: 0;
@@ -57,15 +57,15 @@ body {
   font-size: 20px;
 }
 
-/* RIGHT SIDE: HOME + MENU in one row */
+/* RIGHT SIDE: HOME + MENU in a row */
 .right-actions{
   display: flex;
   align-items: center;
-  gap: 34px; /* spacing between HOME and MENU */
+  gap: 34px;
 }
 
-/* HOME button styled to match MENU */
-.home-btn {
+/* HOME matches MENU style */
+.home-btn{
   border: none;
   background: none;
   color: #000;
@@ -95,7 +95,7 @@ body {
   line-height: 1;
 }
 
-/* ---------- DROPDOWN ---------- */
+/* ---------- DROPDOWN (smooth slide like your screenshot) ---------- */
 .dropdown {
   position: fixed;
   top: 90px;
@@ -145,6 +145,7 @@ body {
 
 .page.is-active { display: block; }
 
+/* Only some pages scroll */
 .page-scroll {
   overflow-y: auto;
   overflow-x: hidden;
@@ -152,7 +153,7 @@ body {
   padding-bottom: 110px;
 }
 
-/* ---------- HOME ---------- */
+/* ---------- HOME (hero like rough draft) ---------- */
 .hero {
   width: 100%;
   height: 100%;
@@ -162,7 +163,7 @@ body {
 .hero-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* keeps cinematic crop */
   object-position: center;
   filter: blur(12px);
   transition: filter 1s ease;
@@ -183,7 +184,7 @@ body.loaded .hero-img { filter: blur(0); }
   color: rgba(255,255,255,.55);
 }
 
-/* ---------- ABOUT ---------- */
+/* ---------- ABOUT (text + image like rough draft) ---------- */
 .about-layout {
   width: 100%;
   min-height: calc(100vh - 90px);
@@ -193,7 +194,7 @@ body.loaded .hero-img { filter: blur(0); }
 }
 
 .about-text {
-  background: #000;
+  background: #000; /* black behind text */
   padding: 56px 54px;
 }
 
@@ -210,6 +211,7 @@ body.loaded .hero-img { filter: blur(0); }
   color: rgba(255,255,255,.92);
 }
 
+/* extra breathing room so it doesn't hit bottom */
 .about-pad { height: 40px; }
 
 .about-image img {
@@ -220,12 +222,13 @@ body.loaded .hero-img { filter: blur(0); }
   display: block;
 }
 
+/* second image under */
 .about-bottom img {
   width: 100%;
   display: block;
 }
 
-/* ---------- SERVICES ---------- */
+/* ---------- SERVICES (scroll allowed) ---------- */
 .services {
   padding: 56px 54px 90px;
 }
@@ -267,7 +270,7 @@ body.loaded .hero-img { filter: blur(0); }
   opacity: .95;
 }
 
-/* ---------- GET STARTED ---------- */
+/* ---------- GET STARTED (won’t cut off) ---------- */
 .contact {
   padding: 56px 54px 90px;
   max-width: 980px;
@@ -311,19 +314,20 @@ body.loaded .hero-img { filter: blur(0); }
 
 .radio input { transform: translateY(1px); }
 
-.submit-btn {
-  margin-top: 28px;
-  padding: 14px 26px;
+/* Submit button (simple + clean) */
+.submit-btn{
+  margin-top: 34px;
   border: 2px solid rgba(255,255,255,.75);
   background: transparent;
   color: #fff;
   font-family: inherit;
   font-size: 20px;
-  letter-spacing: .08em;
+  letter-spacing: .12em;
+  padding: 14px 22px;
   cursor: pointer;
 }
 
-.submit-btn:hover { opacity: .85; }
+.submit-btn:hover{ opacity: .85; }
 
 .contact-spacer { height: 40px; }
 
@@ -334,5 +338,4 @@ body.loaded .hero-img { filter: blur(0); }
   .about-layout { grid-template-columns: 1fr; }
   .about-image { height: 60vh; }
   .hero-name { padding: 0 28px; }
-  .right-actions { gap: 22px; }
 }
