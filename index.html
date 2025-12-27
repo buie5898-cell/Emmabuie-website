@@ -17,7 +17,6 @@
   <header class="topbar">
     <div class="left-actions">
       <a class="icon-btn" href="https://instagram.com/emmabuie" target="_blank" rel="noopener">
-        <!-- simple black IG icon -->
         <svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm10.25 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Z"/>
         </svg>
@@ -26,20 +25,20 @@
       <a class="mail-link" href="mailto:emmaruthbuie@yahoo.com">MAIL</a>
     </div>
 
-    <!-- ✅ ONLY ADDITION: wrapper + HOME to the LEFT of MENU -->
+    <!-- ✅ HOME added LEFT of MENU, same style -->
     <div class="right-actions">
       <button class="menu-btn home-btn" id="homeBtn" type="button">
         <span class="menu-text">HOME</span>
       </button>
 
-      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="dropdown">
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="dropdown" type="button">
         <span class="menu-text">MENU</span>
         <span class="menu-icon">≡</span>
       </button>
     </div>
   </header>
 
-  <!-- DROPDOWN (slides down like your screenshot) -->
+  <!-- DROPDOWN -->
   <nav class="dropdown" id="dropdown" aria-hidden="true">
     <div class="dropdown-nav">
       <button class="nav-link" data-page="about" type="button">About</button>
@@ -48,12 +47,18 @@
     </div>
   </nav>
 
-  <!-- PAGES (home is locked, others can scroll) -->
+  <!-- PAGES -->
   <main class="pages">
+
     <!-- HOME (NO SCROLL) -->
     <section class="page page-home is-active" id="home" aria-label="Home">
       <div class="hero">
-        <img src="assets/hero.png" class="hero-img" alt="Emma Buie" />
+        <!-- ✅ Bulletproof hero: loads hero.png OR hero.jpg (same placement/crop) -->
+        <picture>
+          <source srcset="assets/hero.png" type="image/png">
+          <img src="assets/hero.jpg" class="hero-img" alt="Emma Buie" />
+        </picture>
+
         <div class="hero-name">
           <span>EMMA</span>
           <span>BUIE</span>
@@ -67,6 +72,7 @@
         <div class="about-text">
           <h1>HI I’M EMMA</h1>
 
+          <!-- ✅ Put back exactly what you said was cut -->
           <p>
             I’m a self-taught web designer specializing in simple, custom-built websites for creators and businesses
             seeking a strong digital presence.
@@ -90,7 +96,6 @@
         </div>
       </div>
 
-      <!-- second image underneath -->
       <div class="about-bottom">
         <img src="assets/rough1.png" alt="Second about photo" />
       </div>
@@ -99,6 +104,8 @@
     <!-- SERVICES (SCROLL OK) -->
     <section class="page page-scroll" id="services" aria-label="Services">
       <div class="services">
+
+        <!-- ✅ Put back everything exactly -->
         <h2>MAIN SERVICES</h2>
 
         <div class="services-grid">
@@ -107,6 +114,7 @@
               CUSTOM WEBSITE DESIGN<br>
               STARTING AT $400
             </h3>
+
             <p>
               Simple, custom-built websites designed from scratch for creators and businesses seeking a strong digital presence.
               Each project is tailored, scalable, and thoughtfully aligned with your brand.
@@ -124,6 +132,7 @@
           <div class="service-card">
             <h3>ANNUAL WEBSITE MAINTENANCE</h3>
             <p class="muted">Starting at $50/year</p>
+
             <p>
               Ongoing support to keep your website updated, optimized, and performing seamlessly as your brand evolves.
             </p>
@@ -153,6 +162,7 @@
       <div class="contact">
         <h2>Get Started</h2>
 
+        <!-- ✅ Put back all fields exactly -->
         <label class="field">
           <span>First &amp; Last Name</span>
           <input type="text" />
@@ -179,7 +189,7 @@
           <label><input type="radio" name="maintenance" /> NO</label>
         </div>
 
-        <!-- ✅ ONLY ADDITION: Submit button UNDER the info -->
+        <!-- ✅ SUBMIT button underneath the info -->
         <button class="submit-btn" type="button">SUBMIT</button>
 
         <div class="contact-spacer"></div>
@@ -189,12 +199,10 @@
 
   <script>
     const menuBtn = document.getElementById("menuBtn");
+    const homeBtn = document.getElementById("homeBtn");
     const dropdown = document.getElementById("dropdown");
     const pages = document.querySelectorAll(".page");
     const links = document.querySelectorAll(".nav-link");
-
-    // ✅ ONLY ADDITION: home button hook
-    const homeBtn = document.getElementById("homeBtn");
 
     function openMenu() {
       dropdown.classList.add("open");
@@ -217,8 +225,6 @@
       const next = document.getElementById(pageId);
       if (next) next.classList.add("is-active");
       closeMenu();
-
-      // if scrolling pages, start at top
       if (next && next.classList.contains("page-scroll")) next.scrollTop = 0;
     }
 
@@ -234,26 +240,19 @@
       });
     });
 
-    // ✅ ONLY ADDITION: HOME click goes to home
     homeBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       goTo("home");
     });
 
-    // close if you click outside dropdown
     document.addEventListener("click", () => closeMenu());
-
-    // don’t close if clicking inside dropdown
     dropdown.addEventListener("click", (e) => e.stopPropagation());
 
-    // Esc closes menu
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeMenu();
     });
 
-    // smooth blur->clear animation on home image
     window.addEventListener("load", () => document.body.classList.add("loaded"));
   </script>
 </body>
 </html>
-
