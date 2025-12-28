@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- IMPORTANT: viewport-fit=cover fixes notch/old iPhone clipping -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Emma Buie</title>
 
@@ -14,7 +13,7 @@
 </head>
 
 <body>
-  <!-- TOP BAR (always visible) -->
+  <!-- TOP BAR -->
   <header class="topbar">
     <div class="left-actions">
       <a class="icon-btn" href="https://instagram.com/emmabuie" target="_blank" rel="noopener" aria-label="Instagram">
@@ -26,7 +25,6 @@
       <a class="mail-link" href="mailto:emmaruthbuie@yahoo.com">MAIL</a>
     </div>
 
-    <!-- HOME always beside MENU (HOME on the left) -->
     <div class="right-actions">
       <button class="menu-btn" id="homeBtn" type="button">
         <span class="menu-text">HOME</span>
@@ -184,7 +182,6 @@
   </main>
 
   <script>
-    // ✅ Real visible height fix (helps old iPhones + old Android Chrome)
     function setVh() {
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -192,6 +189,17 @@
     setVh();
     window.addEventListener('resize', setVh);
     window.addEventListener('orientationchange', setVh);
+
+    // ✅ measure REAL topbar height (works on old devices)
+    function setTopbarH() {
+      const tb = document.querySelector('.topbar');
+      if (!tb) return;
+      const h = tb.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--topbar-h', `${h}px`);
+    }
+    window.addEventListener('load', setTopbarH);
+    window.addEventListener('resize', setTopbarH);
+    window.addEventListener('orientationchange', setTopbarH);
 
     const menuBtn = document.getElementById("menuBtn");
     const dropdown = document.getElementById("dropdown");
