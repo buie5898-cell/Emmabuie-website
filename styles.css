@@ -9,16 +9,17 @@ html, body {
 body {
   background: #000;
   color: #fff;
-  overflow: hidden;
+  overflow: hidden; /* keeps whole site from scrolling (we scroll inside pages) */
 }
 
-/* TOP BAR */
+/* ---------- TOP BAR ---------- */
 .topbar {
   position: fixed;
   top: 0;
-  height: 90px;
   width: 100%;
+  height: 90px;
   background: #fff;
+  color: #000;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,25 +27,33 @@ body {
   z-index: 2000;
 }
 
-.left-actions, .right-actions {
+.left-actions {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
+}
+
+.right-actions{
+  display: flex;
+  align-items: center;
+  gap: 34px;
 }
 
 .icon-btn {
   width: 34px;
   height: 34px;
-  background: #000;
   border-radius: 8px;
-  display: flex;
+  background: #000;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 }
 
 .ig-icon {
-  fill: #fff;
   width: 18px;
+  height: 18px;
+  fill: #fff;
 }
 
 .mail-link {
@@ -58,21 +67,31 @@ body {
   border: none;
   background: none;
   color: #000;
-  font-size: 22px;
-  letter-spacing: .35em;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 18px;
   cursor: pointer;
+  letter-spacing: .35em;
+  font-size: 22px;
+  padding: 0;
 }
 
-.menu-icon { font-size: 28px; }
+.menu-icon {
+  font-size: 28px;
+  line-height: 1;
+}
 
-/* DROPDOWN */
+/* ---------- DROPDOWN ---------- */
 .dropdown {
   position: fixed;
   top: 90px;
   width: 100%;
   background: #fff;
+  z-index: 1900;
   transform: translateY(-140%);
-  transition: transform .4s ease;
+  transition: transform 0.45s ease;
+  box-shadow: 0 6px 30px rgba(0,0,0,.12);
 }
 
 .dropdown.open { transform: translateY(0); }
@@ -80,50 +99,79 @@ body {
 .dropdown-nav {
   display: flex;
   justify-content: center;
-  gap: 90px;
-  padding: 30px;
+  align-items: center;
+  gap: 110px;
+  padding: 34px 24px;
 }
 
 .nav-link {
-  font-size: 32px;
-  background: none;
   border: none;
+  background: none;
   cursor: pointer;
+  font-family: inherit;
+  font-size: 34px;
+  color: #000;
 }
 
-/* PAGES */
+.nav-link:hover { opacity: .7; }
+
+/* ---------- PAGES container ---------- */
 .pages {
   position: fixed;
   top: 90px;
   bottom: 0;
   width: 100%;
+  background: #000;
 }
 
-.page { display: none; height: 100%; }
+.page {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
 .page.is-active { display: block; }
 
+/* scrolling pages */
 .page-scroll {
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  padding-bottom: 110px;
 }
 
-/* HOME FIXES */
+/* ---------- HOME (FULL IMAGE + SCROLL) ---------- */
+/* Key fix: don't force hero to be 100% height; allow it to be taller than viewport */
+.page-home {
+  background: #000;
+}
+
+/* Make hero size based on its content (image), not forced to screen */
 .hero {
+  width: 100%;
+  height: auto;                 /* IMPORTANT */
   min-height: calc(100svh - 90px);
+  position: relative;
 }
 
+/* Show full image (no crop). If it's taller than screen, Home scroll will reveal the rest */
 .hero-img {
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  height: auto;                 /* IMPORTANT */
+  object-fit: contain;          /* KEY: no crop */
+  object-position: center;
   display: block;
+  filter: blur(12px);
+  transition: filter 1s ease;
 }
+
+body.loaded .hero-img { filter: blur(0); }
 
 .hero-name {
   position: absolute;
-  bottom: 12%;
   left: 0;
   right: 0;
+  bottom: 12%;
   display: flex;
   justify-content: space-between;
   padding: 0 70px;
@@ -132,30 +180,162 @@ body {
   color: rgba(255,255,255,.55);
 }
 
-/* ABOUT */
+/* Fallback for older browsers that don't support svh */
+@supports not (height: 100svh) {
+  .hero { min-height: calc(100vh - 90px); }
+}
+
+/* ---------- ABOUT ---------- */
 .about-layout {
+  width: 100%;
+  min-height: calc(100vh - 90px);
   display: grid;
   grid-template-columns: 42% 58%;
+  background: #000;
 }
 
-.about-text { padding: 56px; }
-.about-image img, .about-bottom img { width: 100%; }
+.about-text {
+  background: #000;
+  padding: 56px 54px;
+}
 
-/* SERVICES */
-.services { padding: 56px; }
-.services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 50px; }
+.about-text h1 {
+  margin: 0 0 18px 0;
+  font-size: clamp(44px, 4.7vw, 78px);
+  letter-spacing: .22em;
+}
 
-/* CONTACT */
-.contact { padding: 56px; max-width: 900px; }
-.field span { display: block; margin-bottom: 8px; }
-.field input { width: 100%; background: none; border-bottom: 2px solid #fff; color: #fff; }
+.about-text p {
+  font-size: clamp(16px, 1.4vw, 22px);
+  line-height: 1.75;
+  margin: 0 0 18px 0;
+  color: rgba(255,255,255,.92);
+}
 
-.submit-btn {
-  margin-top: 30px;
-  background: none;
-  border: 2px solid #fff;
+.about-pad { height: 40px; }
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.about-bottom img {
+  width: 100%;
+  display: block;
+}
+
+/* ---------- SERVICES ---------- */
+.services {
+  padding: 56px 54px 90px;
+}
+
+.services h2 {
+  margin: 0 0 30px;
+  font-size: clamp(34px, 3vw, 54px);
+  letter-spacing: .12em;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+}
+
+.service-card h3 {
+  margin: 0 0 16px;
+  font-size: clamp(20px, 1.7vw, 28px);
+  letter-spacing: .08em;
+}
+
+.service-card p {
+  margin: 0 0 14px;
+  font-size: clamp(16px, 1.25vw, 20px);
+  line-height: 1.6;
+}
+
+.muted { opacity: .85; }
+
+.list div {
+  margin: 6px 0;
+  font-size: clamp(16px, 1.25vw, 20px);
+}
+
+.services-footer {
+  margin-top: 70px;
+  font-size: clamp(16px, 1.25vw, 22px);
+  opacity: .95;
+}
+
+/* ---------- GET STARTED ---------- */
+.contact {
+  padding: 56px 54px 90px;
+  max-width: 980px;
+}
+
+.contact h2 {
+  margin: 0 0 36px;
+  font-size: clamp(34px, 3vw, 54px);
+}
+
+.field {
+  display: block;
+  margin-bottom: 26px;
+}
+
+.field span {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.field input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255,255,255,.75);
+  padding: 12px 0;
   color: #fff;
-  padding: 14px 28px;
-  letter-spacing: .2em;
+  font-size: 20px;
+  outline: none;
+}
+
+.radio {
+  margin-top: 26px;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 22px;
+}
+
+.radio input { transform: translateY(1px); }
+
+.contact-spacer { height: 40px; }
+
+.submit-btn{
+  margin-top: 34px;
+  padding: 14px 22px;
+  background: transparent;
+  border: 2px solid rgba(255,255,255,.75);
+  color: #fff;
+  font-family: inherit;
+  letter-spacing: .22em;
+  font-size: 18px;
   cursor: pointer;
 }
+
+.submit-btn:hover{ opacity: .75; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 980px) {
+  .dropdown-nav { gap: 46px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .about-layout { grid-template-columns: 1fr; }
+  .about-image { height: 60vh; }
+  .hero-name { padding: 0 28px; }
+  .right-actions{ gap: 18px; }
+}
+
