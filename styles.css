@@ -223,7 +223,7 @@ body.loaded .hero-img { filter: blur(0); }
 }
 
 .hero-intro.play {
-  animation: introFadeOut 3.0s ease forwards;
+  animation: introFadeOut 3.5s ease forwards;
 }
 
 @keyframes introFadeOut {
