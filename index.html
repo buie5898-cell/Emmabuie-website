@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<!-- data-page controls which page is active + whether the HOME overlay text shows -->
 <body data-page="home">
   <!-- TOP BAR -->
   <header class="topbar" id="topbar">
@@ -47,18 +46,21 @@
     </div>
   </nav>
 
-  <!-- ✅ FIXED HOME OVERLAY TEXT (does not move) -->
-  <div class="home-name-fixed" aria-hidden="true">
-    <span>EMMA</span>
-    <span>BUIE</span>
-  </div>
-
   <main class="pages">
-    <!-- HOME (scroll reveals more image; text overlay stays fixed) -->
+    <!-- HOME -->
     <section class="page page-home page-scroll is-active" id="home" aria-label="Home">
-      <div class="hero">
-        <img src="./assets/hero.png" class="hero-img" alt="Emma Buie" />
+      <!-- ✅ ONLY this image area scrolls (it’s taller than the viewport) -->
+      <div class="home-media">
+        <img src="./assets/hero.png" class="home-photo" alt="Emma Buie" />
       </div>
+
+      <!-- ✅ TEXT LOCKED on top of the photo -->
+      <div class="home-title" aria-hidden="true">
+        <span>EMMA</span>
+        <span>BUIE</span>
+      </div>
+
+      <!-- little extra scroll room so you can see more of the photo -->
       <div class="home-scroll-space" aria-hidden="true"></div>
     </section>
 
@@ -186,13 +188,12 @@
   </main>
 
   <script>
-    // ✅ Best compatibility height fix (old iOS + old Android)
+    // height fix for older mobile browsers
     function setVh() {
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
     }
 
-    // ✅ Measure real topbar height so nothing ever overlaps/crops
     function setTopbarH() {
       const tb = document.getElementById('topbar');
       if (!tb) return;
@@ -205,14 +206,12 @@
     window.addEventListener('resize', () => { setVh(); setTopbarH(); });
     window.addEventListener('orientationchange', () => { setVh(); setTopbarH(); });
 
-    // extra reliability: topbar height can change after fonts load
     window.addEventListener('load', () => {
       setVh();
       setTopbarH();
       document.body.classList.add("loaded");
     });
 
-    // keep updating topbar height if anything changes (super reliable)
     if ('ResizeObserver' in window) {
       const ro = new ResizeObserver(() => setTopbarH());
       ro.observe(document.getElementById('topbar'));
@@ -244,10 +243,8 @@
       pages.forEach(p => p.classList.remove("is-active"));
       const next = document.getElementById(pageId);
       if (next) next.classList.add("is-active");
-
-      document.body.dataset.page = pageId; // ✅ controls fixed HOME text visibility
+      document.body.dataset.page = pageId;
       closeMenu();
-
       if (next && next.classList.contains("page-scroll")) next.scrollTop = 0;
     }
 
