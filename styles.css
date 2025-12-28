@@ -1,5 +1,12 @@
 * { box-sizing: border-box; }
 
+/* --- safe area vars for old/new iPhones --- */
+:root{
+  --topbar-base: 90px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --topbar-h: calc(var(--topbar-base) + var(--safe-top));
+}
+
 html, body {
   margin: 0;
   height: 100%;
@@ -9,7 +16,7 @@ html, body {
 body {
   background: #000;
   color: #fff;
-  overflow: hidden; /* site does not scroll; pages scroll */
+  overflow: hidden;
 }
 
 /* ---------- TOP BAR ---------- */
@@ -17,13 +24,13 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 90px;
+  height: var(--topbar-h);
   background: #fff;
   color: #000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 34px;
+  padding: var(--safe-top) 34px 0 34px; /* ✅ prevents notch/search-bar clipping */
   z-index: 2000;
 }
 
@@ -33,7 +40,6 @@ body {
   gap: 18px;
 }
 
-/* HOME always beside MENU (HOME on left) */
 .right-actions{
   display: flex;
   align-items: center;
@@ -88,7 +94,7 @@ body {
 /* ---------- DROPDOWN ---------- */
 .dropdown {
   position: fixed;
-  top: 90px;
+  top: var(--topbar-h);     /* ✅ was 90px */
   width: 100%;
   background: #fff;
   z-index: 1900;
@@ -121,10 +127,10 @@ body {
 /* ---------- PAGES container ---------- */
 .pages {
   position: fixed;
-  top: 90px;
+  top: var(--topbar-h);     /* ✅ was 90px */
   left: 0;
   right: 0;
-  height: calc((var(--vh, 1vh) * 100) - 90px);
+  height: calc((var(--vh, 1vh) * 100) - var(--topbar-h)); /* ✅ dynamic + safe */
   background: #000;
 }
 
@@ -136,7 +142,6 @@ body {
 
 .page.is-active { display: block; }
 
-/* ✅ This is the key desktop fix: force the scroll container to actually have height */
 .page-scroll {
   height: 100%;
   overflow-y: auto;
@@ -146,21 +151,18 @@ body {
   padding-bottom: 110px;
 }
 
-/* ---------- HOME (FULL IMAGE + ALWAYS SCROLLS) ---------- */
-.page-home { background: #000; }
-
-/* Full image (no crop) */
+/* ---------- HOME (your current behavior stays) ---------- */
 .hero {
   width: 100%;
+  height: calc(100% + 320px); /* keeps your home scroll */
   position: relative;
 }
 
-/* Show the entire image */
 .hero-img {
   width: 100%;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
   display: block;
   filter: blur(12px);
   transition: filter 1s ease;
@@ -181,16 +183,10 @@ body.loaded .hero-img { filter: blur(0); }
   color: rgba(255,255,255,.55);
 }
 
-/* ✅ GUARANTEES overflow so Mac scroll always works */
-.home-scroll-space{
-  height: 260px;
-  display: block;
-}
-
 /* ---------- ABOUT ---------- */
 .about-layout {
   width: 100%;
-  min-height: calc((var(--vh, 1vh) * 100) - 90px);
+  min-height: calc((var(--vh, 1vh) * 100) - var(--topbar-h));
   display: grid;
   grid-template-columns: 42% 58%;
   background: #000;
