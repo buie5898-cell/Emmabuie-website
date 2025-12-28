@@ -119,7 +119,7 @@ body {
 .nav-link:hover { opacity: .7; }
 
 /* ---------- PAGES container ---------- */
-/* ✅ uses dynamic vh for older iPhones */
+/* Dynamic height for iOS Safari */
 .pages {
   position: fixed;
   top: 90px;
@@ -137,27 +137,22 @@ body {
 
 .page.is-active { display: block; }
 
-/* scrolling pages */
+/* Make scroll container reliably scroll on desktop + mobile */
 .page-scroll {
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain; /* iOS stability */
-  touch-action: pan-y;          /* iOS stability */
+  overscroll-behavior: contain;
   padding-bottom: 110px;
 }
 
 /* ---------- HOME (FULL IMAGE + SCROLL) ---------- */
-/* Only HOME: remove absolute trapping so scroll works on very old iPhones */
-.page-home {
-  position: relative;
-  inset: auto;
-}
+.page-home { background: #000; }
 
-/* Don’t force to screen height; allow real content height */
+/* Let hero grow (so scroll happens) */
 .hero {
   width: 100%;
-  height: auto;
   position: relative;
 }
 
@@ -187,9 +182,9 @@ body.loaded .hero-img { filter: blur(0); }
   color: rgba(255,255,255,.55);
 }
 
-/* Extra space so Home ALWAYS scrolls a bit */
+/* Extra space so Home ALWAYS scrolls (desktop + mobile) */
 .home-scroll-space{
-  height: 180px;
+  height: 220px;
 }
 
 /* ---------- ABOUT ---------- */
