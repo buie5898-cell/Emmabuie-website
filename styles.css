@@ -195,7 +195,7 @@ body.loaded .hero-img { filter: blur(0); }
   position: absolute;
   left: 0;
   right: 0;
-  top: 22%;
+  top: 29%;
   display: flex;
   justify-content: space-between;
   padding: 0 clamp(18px, 6vw, 70px);
