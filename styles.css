@@ -164,7 +164,7 @@ a:focus { outline: none; }
   padding-bottom: 110px;
 }
 
-/* ---------- HOME (ONLY image scrolls; text stays attached to image) ---------- */
+/* ---------- HOME (image scrolls; text stays attached to image) ---------- */
 .page-home {
   overflow-y: auto;                 /* allow scroll on home only */
   overflow-x: hidden;
@@ -205,33 +205,29 @@ body.loaded .hero-img { filter: blur(0); }
   pointer-events: none;
 }
 
-/* ✅ NEW: Center “CUSTOM WEBSITES” that fades away once on load */
+/* ✅ NEW: CUSTOM WEBSITES centered + black + slow fade away */
 .hero-intro {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  font-family: inherit;
+  font-family: inherit;                 /* same as home page font */
   font-weight: 600;
-  font-size: clamp(18px, 3.5vw, 44px);   /* responsive */
+  font-size: clamp(18px, 3.5vw, 44px);  /* responsive on all devices */
   letter-spacing: .28em;
-  color: #000;                            /* black text */
+  color: #000;                          /* black */
   text-align: center;
   white-space: nowrap;
-  opacity: 0;
+  opacity: 1;
   pointer-events: none;
 }
 
-/* play once */
 .hero-intro.play {
-  animation: introFade 4.8s ease forwards;
+  animation: introFadeOut 5.5s ease forwards;
 }
 
-/* fade in, hold, fade out */
-@keyframes introFade {
-  0%   { opacity: 0; }
-  12%  { opacity: 1; }
-  60%  { opacity: 1; }
+@keyframes introFadeOut {
+  0%   { opacity: 1; }
   100% { opacity: 0; }
 }
 
@@ -396,6 +392,6 @@ body.loaded .hero-img { filter: blur(0); }
   .nav-link { font-size: 22px; }
   .hero-name { letter-spacing: .18em; font-size: clamp(26px, 8vw, 46px); }
 
-  /* keep intro from overflowing on tiny screens */
+  /* keep intro clean on tiny screens */
   .hero-intro { letter-spacing: .18em; }
 }
