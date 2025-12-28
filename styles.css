@@ -9,7 +9,7 @@ html, body {
 body {
   background: #000;
   color: #fff;
-  overflow: hidden; /* keeps whole site from scrolling (we scroll inside pages) */
+  overflow: hidden; /* site doesn't scroll; pages scroll */
 }
 
 /* ---------- TOP BAR ---------- */
@@ -33,10 +33,12 @@ body {
   gap: 18px;
 }
 
+/* HOME always beside MENU, HOME on the left */
 .right-actions{
   display: flex;
   align-items: center;
   gap: 34px;
+  flex-wrap: nowrap;
 }
 
 .icon-btn {
@@ -75,6 +77,7 @@ body {
   letter-spacing: .35em;
   font-size: 22px;
   padding: 0;
+  white-space: nowrap;
 }
 
 .menu-icon {
@@ -141,24 +144,25 @@ body {
 }
 
 /* ---------- HOME (FULL IMAGE + SCROLL) ---------- */
-/* Key fix: don't force hero to be 100% height; allow it to be taller than viewport */
+/* Let HOME scroll and allow content height to exceed the viewport */
 .page-home {
+  position: relative;
+  inset: auto;
   background: #000;
 }
 
-/* Make hero size based on its content (image), not forced to screen */
+/* Don't lock hero to viewport height */
 .hero {
   width: 100%;
-  height: auto;                 /* IMPORTANT */
-  min-height: calc(100svh - 90px);
+  height: auto;
   position: relative;
 }
 
-/* Show full image (no crop). If it's taller than screen, Home scroll will reveal the rest */
+/* Full image, no crop */
 .hero-img {
   width: 100%;
-  height: auto;                 /* IMPORTANT */
-  object-fit: contain;          /* KEY: no crop */
+  height: auto;
+  object-fit: contain;
   object-position: center;
   display: block;
   filter: blur(12px);
@@ -167,6 +171,7 @@ body {
 
 body.loaded .hero-img { filter: blur(0); }
 
+/* Your overlay text stays exactly where it was */
 .hero-name {
   position: absolute;
   left: 0;
@@ -180,9 +185,9 @@ body.loaded .hero-img { filter: blur(0); }
   color: rgba(255,255,255,.55);
 }
 
-/* Fallback for older browsers that don't support svh */
-@supports not (height: 100svh) {
-  .hero { min-height: calc(100vh - 90px); }
+/* Extra space at end so it ALWAYS scrolls */
+.home-scroll-space{
+  height: 140px;
 }
 
 /* ---------- ABOUT ---------- */
@@ -338,4 +343,3 @@ body.loaded .hero-img { filter: blur(0); }
   .hero-name { padding: 0 28px; }
   .right-actions{ gap: 18px; }
 }
-
