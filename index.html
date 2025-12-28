@@ -52,8 +52,8 @@
         <div class="hero-inner">
           <img src="assets/hero.png" class="hero-img" alt="Emma Buie" />
 
-          <!-- ✅ NEW: intro text that fades away once on load -->
-          <div class="hero-intro" id="heroIntro" aria-hidden="true">CUSTOM WEBSITES</div>
+          <!-- ✅ NEW: centered text that fades away once on load -->
+          <div class="hero-intro" id="heroIntro">CUSTOM WEBSITES</div>
 
           <div class="hero-name">
             <span>EMMA</span>
@@ -195,8 +195,6 @@
     const pages = document.querySelectorAll(".page");
     const links = document.querySelectorAll(".nav-link");
     const homeBtn = document.getElementById("homeBtn");
-
-    // ✅ NEW: intro text reference
     const heroIntro = document.getElementById("heroIntro");
 
     function openMenu() {
@@ -252,7 +250,7 @@
     window.addEventListener("load", () => {
       document.body.classList.add("loaded");
 
-      // ✅ NEW: play once, then remove from layout
+      /* show once, then fade away */
       if (heroIntro) {
         heroIntro.classList.add("play");
         heroIntro.addEventListener("animationend", () => {
