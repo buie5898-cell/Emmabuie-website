@@ -12,9 +12,10 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
+<!-- data-page controls which page is active + whether the HOME overlay text shows -->
+<body data-page="home">
   <!-- TOP BAR -->
-  <header class="topbar">
+  <header class="topbar" id="topbar">
     <div class="left-actions">
       <a class="icon-btn" href="https://instagram.com/emmabuie" target="_blank" rel="noopener" aria-label="Instagram">
         <svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -46,16 +47,19 @@
     </div>
   </nav>
 
+  <!-- ✅ FIXED HOME OVERLAY TEXT (does not move) -->
+  <div class="home-name-fixed" aria-hidden="true">
+    <span>EMMA</span>
+    <span>BUIE</span>
+  </div>
+
   <main class="pages">
-    <!-- HOME -->
+    <!-- HOME (scroll reveals more image; text overlay stays fixed) -->
     <section class="page page-home page-scroll is-active" id="home" aria-label="Home">
       <div class="hero">
         <img src="./assets/hero.png" class="hero-img" alt="Emma Buie" />
-        <div class="hero-name">
-          <span>EMMA</span>
-          <span>BUIE</span>
-        </div>
       </div>
+      <div class="home-scroll-space" aria-hidden="true"></div>
     </section>
 
     <!-- ABOUT -->
@@ -182,24 +186,37 @@
   </main>
 
   <script>
+    // ✅ Best compatibility height fix (old iOS + old Android)
     function setVh() {
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
     }
-    setVh();
-    window.addEventListener('resize', setVh);
-    window.addEventListener('orientationchange', setVh);
 
-    // ✅ measure REAL topbar height (works on old devices)
+    // ✅ Measure real topbar height so nothing ever overlaps/crops
     function setTopbarH() {
-      const tb = document.querySelector('.topbar');
+      const tb = document.getElementById('topbar');
       if (!tb) return;
-      const h = tb.getBoundingClientRect().height;
-      document.documentElement.style.setProperty('--topbar-h', `${h}px`);
+      document.documentElement.style.setProperty('--topbar-h', `${tb.offsetHeight}px`);
     }
-    window.addEventListener('load', setTopbarH);
-    window.addEventListener('resize', setTopbarH);
-    window.addEventListener('orientationchange', setTopbarH);
+
+    setVh();
+    setTopbarH();
+
+    window.addEventListener('resize', () => { setVh(); setTopbarH(); });
+    window.addEventListener('orientationchange', () => { setVh(); setTopbarH(); });
+
+    // extra reliability: topbar height can change after fonts load
+    window.addEventListener('load', () => {
+      setVh();
+      setTopbarH();
+      document.body.classList.add("loaded");
+    });
+
+    // keep updating topbar height if anything changes (super reliable)
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(() => setTopbarH());
+      ro.observe(document.getElementById('topbar'));
+    }
 
     const menuBtn = document.getElementById("menuBtn");
     const dropdown = document.getElementById("dropdown");
@@ -227,7 +244,10 @@
       pages.forEach(p => p.classList.remove("is-active"));
       const next = document.getElementById(pageId);
       if (next) next.classList.add("is-active");
+
+      document.body.dataset.page = pageId; // ✅ controls fixed HOME text visibility
       closeMenu();
+
       if (next && next.classList.contains("page-scroll")) next.scrollTop = 0;
     }
 
@@ -253,8 +273,6 @@
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeMenu();
     });
-
-    window.addEventListener("load", () => document.body.classList.add("loaded"));
   </script>
 </body>
 </html>
