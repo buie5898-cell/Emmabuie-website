@@ -204,7 +204,7 @@ body.loaded .hero-img { filter: blur(0); }
 .hero-intro {
   position: absolute;
   left: 50%;
-  bottom: 22%;                 /* moved UP from bottom */
+  top: 40%;                 /* moved UP from bottom */
   transform: translateX(-50%);
   font-size: clamp(34px, 6vw, 92px);  /* same as hero-name */
   letter-spacing: .28em;       /* same as hero-name */
